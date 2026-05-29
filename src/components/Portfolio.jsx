@@ -65,6 +65,7 @@ export default function Portfolio() {
   const scrollContainerRef = useRef(null);
   const timeoutIdRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
   // Monitor screen size to enable looping mode only on mobile viewports
   useEffect(() => {
@@ -100,6 +101,7 @@ export default function Portfolio() {
       const cards = container.querySelectorAll('.snap-start');
       if (cards.length > 2 && cards[1]) {
         container.scrollLeft = cards[1].offsetLeft;
+        setActiveSlideIndex(0);
       }
     };
 
@@ -181,10 +183,33 @@ export default function Portfolio() {
       // Jump from right duplicate to first original card
       if (scrollLeft >= endDuplicate.offsetLeft - 10) {
         container.scrollLeft = firstOriginal.offsetLeft;
+        setActiveSlideIndex(0);
       }
       // Jump from left duplicate to last original card
       else if (scrollLeft <= startDuplicate.offsetLeft + 10) {
         container.scrollLeft = lastOriginal.offsetLeft;
+        setActiveSlideIndex(filteredProjects.length - 1);
+      } else {
+        // Calculate closest card to set active dot
+        let closestIdx = 1;
+        let minDiff = Infinity;
+        cards.forEach((card, idx) => {
+          const diff = Math.abs(card.offsetLeft - scrollLeft);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIdx = idx;
+          }
+        });
+
+        const totalOriginals = filteredProjects.length;
+        let mappedIdx = closestIdx - 1;
+        if (closestIdx === 0) {
+          mappedIdx = totalOriginals - 1;
+        } else if (closestIdx === cards.length - 1) {
+          mappedIdx = 0;
+        }
+        
+        setActiveSlideIndex(mappedIdx);
       }
     };
 
@@ -331,6 +356,35 @@ export default function Portfolio() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Mobile Pagination Dots */}
+        {isMobile && filteredProjects.length > 1 && (
+          <div className="flex justify-center gap-2 mt-6">
+            {filteredProjects.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => {
+                  const container = scrollContainerRef.current;
+                  if (!container) return;
+                  const cards = container.querySelectorAll('.snap-start');
+                  const targetCard = cards[idx + 1];
+                  if (targetCard) {
+                    container.scrollTo({
+                      left: targetCard.offsetLeft,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  activeSlideIndex === idx
+                    ? 'bg-brand-orange w-6'
+                    : 'bg-white/20 hover:bg-white/40'
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
