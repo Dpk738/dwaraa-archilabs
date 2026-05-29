@@ -89,7 +89,7 @@ export default function Hero() {
           {/* Action CTAs */}
           <motion.div
             variants={itemVariants}
-            className="order-5 md:order-4 flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-4 md:mt-0"
+            className="order-5 md:order-4 flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-12 md:mt-0"
           >
             <a
               href="#contact"
