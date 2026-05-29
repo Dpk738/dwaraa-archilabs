@@ -98,15 +98,22 @@ export default function Portfolio() {
     if (!container || !isMobile) return;
 
     const resetScroll = () => {
-      const cards = container.querySelectorAll('.snap-start');
+      const cards = Array.from(container.querySelectorAll('.snap-start')).filter(card => {
+        const cardId = card.getAttribute('data-id');
+        return loopingProjects.some(p => String(p.id) === cardId);
+      });
+
       if (cards.length > 2 && cards[1]) {
         container.scrollLeft = cards[1].offsetLeft;
-        setActiveSlideIndex(0);
+      } else {
+        container.scrollLeft = 0;
       }
+      setActiveSlideIndex(0);
     };
 
-    requestAnimationFrame(resetScroll);
-  }, [filteredProjects, isMobile]);
+    const timer = setTimeout(resetScroll, 50);
+    return () => clearTimeout(timer);
+  }, [loopingProjects, isMobile]);
 
   useEffect(() => {
     // Only run auto-scroll slideshow on mobile
@@ -121,13 +128,21 @@ export default function Portfolio() {
     const container = scrollContainerRef.current;
     if (!container) return;
 
+    // Helper to get active cards, filtering out exiting elements
+    const getActiveCards = () => {
+      return Array.from(container.querySelectorAll('.snap-start')).filter(card => {
+        const cardId = card.getAttribute('data-id');
+        return loopingProjects.some(p => String(p.id) === cardId);
+      });
+    };
+
     const scheduleNextSlide = (delay) => {
       if (timeoutIdRef.current) {
         clearTimeout(timeoutIdRef.current);
       }
 
       timeoutIdRef.current = setTimeout(() => {
-        const cards = container.querySelectorAll('.snap-start');
+        const cards = getActiveCards();
         if (cards.length <= 1) return;
 
         // Find the card closest to the current scroll position
@@ -169,7 +184,7 @@ export default function Portfolio() {
 
     // Loop scroller boundaries invisibly
     const handleScrollBoundary = () => {
-      const cards = container.querySelectorAll('.snap-start');
+      const cards = getActiveCards();
       if (cards.length <= 2) return;
 
       const scrollLeft = container.scrollLeft;
@@ -225,7 +240,7 @@ export default function Portfolio() {
       container.removeEventListener('mousedown', handleInteraction);
       container.removeEventListener('scroll', handleScrollBoundary);
     };
-  }, [filteredProjects]);
+  }, [loopingProjects]);
 
   const handleFilterClick = (cat) => {
     if (cat === 'All') {
@@ -312,6 +327,7 @@ export default function Portfolio() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ type: 'spring', stiffness: 100, damping: 20 }}
                 key={project.id}
+                data-id={project.id}
                 className="group relative rounded-2xl overflow-hidden bg-brand-card border border-white/5 flex flex-col justify-end aspect-[4/5] shadow-xl snap-start snap-always shrink-0 w-[85vw] sm:w-[450px] md:w-auto"
               >
                 {/* Project Image */}
