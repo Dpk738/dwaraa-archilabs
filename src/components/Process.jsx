@@ -34,20 +34,23 @@ const steps = [
 ];
 
 export default function Process() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  const leftItemVariants = {
+    hidden: { opacity: 0, x: -40, y: 15 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 },
+      x: 0,
+      y: 0,
+      transition: { type: 'spring', stiffness: 80, damping: 16 },
     },
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+  const rightItemVariants = {
+    hidden: { opacity: 0, x: 40, y: 15 },
     visible: {
       opacity: 1,
+      x: 0,
       y: 0,
-      transition: { type: 'spring', stiffness: 90, damping: 18 },
+      transition: { type: 'spring', stiffness: 80, damping: 16 },
     },
   };
 
@@ -72,13 +75,7 @@ export default function Process() {
         </div>
 
         {/* Timeline Layout */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="relative max-w-4xl mx-auto"
-        >
+        <div className="relative max-w-4xl mx-auto">
           {/* Centered vertical line on desktop, left line on mobile */}
           <div className="absolute left-6 md:left-1/2 top-4 bottom-4 w-[1px] bg-white/10 -translate-x-1/2" />
 
@@ -89,7 +86,10 @@ export default function Process() {
               return (
                 <motion.div
                   key={idx}
-                  variants={itemVariants}
+                  variants={isEven ? leftItemVariants : rightItemVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: '-50px' }}
                   className={`flex flex-col md:flex-row items-start relative ${
                     isEven ? 'md:flex-row-reverse' : ''
                   }`}
@@ -122,7 +122,7 @@ export default function Process() {
               );
             })}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

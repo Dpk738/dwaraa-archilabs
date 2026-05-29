@@ -51,19 +51,31 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Header Block */}
-        <div className="max-w-2xl mb-16 md:mb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ type: 'spring', stiffness: 80, damping: 18 }}
+          className="max-w-2xl mb-16 md:mb-24"
+        >
           <span className="text-brand-orange font-semibold text-xs tracking-widest uppercase mb-4 block">
             Get In Touch
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-brand-white">
             Let's Discuss Your Project
           </h2>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           
           {/* Contact Details & Map (Left Column - 5 cols) */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-12">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ type: 'spring', stiffness: 80, damping: 20 }}
+            className="lg:col-span-5 flex flex-col justify-between gap-12"
+          >
             
             {/* Info Cards List */}
             <div className="space-y-8">
@@ -140,10 +152,16 @@ export default function Contact() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* Form (Right Column - 7 cols) */}
-          <div className="lg:col-span-7 p-8 md:p-12 rounded-3xl bg-brand-card border border-white/5 relative">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ type: 'spring', stiffness: 80, damping: 20 }}
+            className="lg:col-span-7 p-8 md:p-12 rounded-3xl bg-brand-card border border-white/5 relative"
+          >
             <h3 className="text-xl md:text-2xl font-heading font-bold text-brand-white mb-8">
               Send a Message
             </h3>
@@ -270,7 +288,7 @@ export default function Contact() {
                 )}
               </button>
             </form>
-          </div>
+          </motion.div>
 
         </div>
       </div>

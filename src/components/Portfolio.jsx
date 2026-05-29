@@ -93,7 +93,13 @@ export default function Portfolio() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Header Block */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ type: 'spring', stiffness: 80, damping: 18 }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24"
+        >
           <div>
             <span className="text-brand-orange font-semibold text-xs tracking-widest uppercase mb-4 block">
               Portfolio
@@ -125,11 +131,15 @@ export default function Portfolio() {
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
         {/* Masonry Grid */}
         <motion.div 
           layout
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ type: 'spring', stiffness: 80, damping: 20 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           <AnimatePresence mode="popLayout">

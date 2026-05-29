@@ -48,17 +48,29 @@ export default function Testimonials() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Header Block */}
-        <div className="max-w-2xl mb-16 md:mb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ type: 'spring', stiffness: 80, damping: 18 }}
+          className="max-w-2xl mb-16 md:mb-24"
+        >
           <span className="text-brand-orange font-semibold text-xs tracking-widest uppercase mb-4 block">
             Testimonials
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-brand-white">
             What Our Clients Say
           </h2>
-        </div>
+        </motion.div>
 
         {/* Carousel Outer frame */}
-        <div className="relative max-w-4xl mx-auto bg-brand-card rounded-3xl border border-white/5 p-8 sm:p-12 md:p-16 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.1 }}
+          className="relative max-w-4xl mx-auto bg-brand-card rounded-3xl border border-white/5 p-8 sm:p-12 md:p-16 overflow-hidden"
+        >
           
           {/* Decorative Quote Icon */}
           <div className="absolute top-8 left-8 text-brand-orange/10">
@@ -136,7 +148,7 @@ export default function Testimonials() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
