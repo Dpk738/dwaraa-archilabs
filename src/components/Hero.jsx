@@ -81,7 +81,7 @@ export default function Hero() {
           {/* Subheading */}
           <motion.p
             variants={itemVariants}
-            className="order-3 text-brand-gray text-base sm:text-lg md:text-xl font-light max-w-xl leading-relaxed mb-8"
+            className="order-3 text-brand-gray text-base sm:text-lg md:text-xl font-light max-w-xl leading-relaxed mb-4 md:mb-8"
           >
             Architecture, interiors, and construction crafted with precision, elegance, and purpose. We transform your raw visions into premium living experiences.
           </motion.p>
@@ -89,7 +89,7 @@ export default function Hero() {
           {/* Action CTAs */}
           <motion.div
             variants={itemVariants}
-            className="order-5 md:order-4 flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-8 md:mt-0"
+            className="order-5 md:order-4 flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-4 md:mt-0"
           >
             <a
               href="#contact"
@@ -111,7 +111,7 @@ export default function Hero() {
           {/* Floating Trust Indicators */}
           <motion.div
             variants={itemVariants}
-            className="order-4 md:order-5 grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 md:mt-12 w-full border-t border-white/5 pt-8"
+            className="order-4 md:order-5 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-4 md:mt-12 w-full border-t border-white/5 pt-4 md:pt-8"
           >
             <div className="flex items-center gap-3">
               <CheckCircle2 className="text-brand-orange shrink-0" size={20} />

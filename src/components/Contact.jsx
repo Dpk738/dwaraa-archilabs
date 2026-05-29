@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, MapPin, Mail, Clock, Send, MessageCircle, AlertCircle, CheckCircle } from 'lucide-react';
+import { Phone, MapPin, Mail, Clock, Send, AlertCircle, CheckCircle } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -293,16 +293,6 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Floating WhatsApp CTA Indicator bottom right */}
-      <a
-        href="https://wa.me/919059919196"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-30 w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white flex items-center justify-center shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 hover:scale-110 active:scale-95 group md:hidden"
-        aria-label="Chat on WhatsApp"
-      >
-        <MessageCircle size={26} className="group-hover:rotate-12 transition-transform" />
-      </a>
     </section>
   );
 }
