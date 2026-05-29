@@ -104,7 +104,7 @@ export default function Portfolio() {
           </div>
 
           {/* Filtering Buttons */}
-          <div className="flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-3 max-w-full">
+          <div className="flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-2 md:gap-3 max-w-full">
             {categories.map((cat) => {
               const isActive = activeFilters.includes(cat);
               return (
