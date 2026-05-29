@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Home, 
@@ -54,6 +55,12 @@ const services = [
 ];
 
 export default function Services() {
+  const [canHover, setCanHover] = useState(false);
+
+  useEffect(() => {
+    setCanHover(window.matchMedia('(hover: hover) and (pointer: fine)').matches);
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -104,7 +111,7 @@ export default function Services() {
               <motion.div
                 key={index}
                 variants={cardVariants}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                whileHover={canHover ? { y: -8, transition: { duration: 0.2 } } : undefined}
                 className="group relative p-5 md:p-8 rounded-2xl bg-brand-card border border-white/5 hover:border-brand-orange/20 transition-colors duration-300 flex flex-col justify-between min-h-[240px] md:min-h-[300px]"
               >
                 {/* Accent border glow indicator */}
