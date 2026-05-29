@@ -225,7 +225,7 @@ export default function Portfolio() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ type: 'spring', stiffness: 100, damping: 20 }}
                 key={project.id}
-                className="group relative rounded-2xl overflow-hidden bg-brand-card border border-white/5 flex flex-col justify-end aspect-[4/5] shadow-xl snap-start shrink-0 w-[85vw] sm:w-[450px] md:w-auto"
+                className="group relative rounded-2xl overflow-hidden bg-brand-card border border-white/5 flex flex-col justify-end aspect-[4/5] shadow-xl snap-start snap-always shrink-0 w-[85vw] sm:w-[450px] md:w-auto"
               >
                 {/* Project Image */}
                 <img
