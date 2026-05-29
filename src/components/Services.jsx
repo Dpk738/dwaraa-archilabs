@@ -96,7 +96,7 @@ export default function Services() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
         >
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -105,31 +105,31 @@ export default function Services() {
                 key={index}
                 variants={cardVariants}
                 whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                className="group relative p-8 rounded-2xl bg-brand-card border border-white/5 hover:border-brand-orange/20 transition-colors duration-300 flex flex-col justify-between aspect-square md:aspect-auto min-h-[300px]"
+                className="group relative p-5 md:p-8 rounded-2xl bg-brand-card border border-white/5 hover:border-brand-orange/20 transition-colors duration-300 flex flex-col justify-between min-h-[240px] md:min-h-[300px]"
               >
                 {/* Accent border glow indicator */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-glow-orange pointer-events-none" />
 
                 <div>
                   {/* Icon Block */}
-                  <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center mb-6 group-hover:bg-brand-orange/10 group-hover:border-brand-orange/20 transition-all duration-300">
-                    <Icon className="text-brand-white group-hover:text-brand-orange transition-colors" size={22} />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center mb-4 md:mb-6 group-hover:bg-brand-orange/10 group-hover:border-brand-orange/20 transition-all duration-300">
+                    <Icon className="text-brand-white group-hover:text-brand-orange transition-colors" size={20} />
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-heading font-bold text-brand-white mb-4 group-hover:text-brand-orange transition-colors">
+                  <h3 className="text-sm md:text-lg font-heading font-bold text-brand-white mb-2 md:mb-4 group-hover:text-brand-orange transition-colors">
                     {service.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-brand-gray text-xs sm:text-sm font-light leading-relaxed">
+                  <p className="text-brand-gray text-[11px] md:text-sm font-light leading-relaxed">
                     {service.description}
                   </p>
                 </div>
 
                 {/* Subtle bottom detail */}
-                <div className="mt-6 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-brand-orange">
+                <div className="mt-4 md:mt-6 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-[9px] md:text-[10px] uppercase font-bold tracking-widest text-brand-orange">
                     Explore Details
                   </span>
                   <div className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
