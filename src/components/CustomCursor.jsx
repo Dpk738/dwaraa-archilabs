@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function CustomCursor() {
+  const [isMobile, setIsMobile] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -13,9 +14,22 @@ export default function CustomCursor() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    // Check if device supports hover (desktop)
-    const mediaQuery = window.matchMedia('(hover: hover)');
-    if (!mediaQuery.matches) return;
+    const checkDevice = () => {
+      const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const widthMobile = window.innerWidth < 768;
+      setIsMobile(widthMobile || !hasHover);
+    };
+
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      setIsVisible(false);
+      return;
+    }
 
     setIsVisible(true);
 
@@ -50,7 +64,7 @@ export default function CustomCursor() {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, [cursorX, cursorY]);
+  }, [isMobile, cursorX, cursorY]);
 
   if (!isVisible) return null;
 

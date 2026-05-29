@@ -87,12 +87,12 @@ export default function Portfolio() {
           </div>
 
           {/* Filtering Buttons */}
-          <div className="flex flex-wrap gap-2 md:gap-3 bg-brand-card p-1.5 rounded-full border border-white/5 max-w-full overflow-x-auto no-scrollbar">
+          <div className="flex flex-nowrap md:flex-wrap items-center gap-2 md:gap-3 bg-brand-card p-1.5 rounded-full border border-white/5 max-w-full overflow-x-auto no-scrollbar">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
-                className={`px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+                className={`flex-shrink-0 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
                   activeFilter === cat
                     ? 'bg-brand-orange text-brand-bg'
                     : 'text-brand-gray hover:text-brand-white hover:bg-white/5'
