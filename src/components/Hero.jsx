@@ -63,7 +63,7 @@ export default function Hero() {
           {/* Subtitle tag */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs md:text-sm font-semibold tracking-wider uppercase mb-6"
+            className="order-1 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs md:text-sm font-semibold tracking-wider uppercase mb-6"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse"></span>
             Every home tells a story. We write yours.
@@ -72,7 +72,7 @@ export default function Hero() {
           {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-brand-white leading-[1.1] mb-6"
+            className="order-2 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-brand-white leading-[1.1] mb-6"
           >
             Designing Spaces <br className="hidden md:inline" />
             That Feel Like <span className="text-brand-orange">Home.</span>
@@ -81,7 +81,7 @@ export default function Hero() {
           {/* Subheading */}
           <motion.p
             variants={itemVariants}
-            className="text-brand-gray text-base sm:text-lg md:text-xl font-light max-w-xl leading-relaxed mb-8"
+            className="order-3 text-brand-gray text-base sm:text-lg md:text-xl font-light max-w-xl leading-relaxed mb-8"
           >
             Architecture, interiors, and construction crafted with precision, elegance, and purpose. We transform your raw visions into premium living experiences.
           </motion.p>
@@ -89,7 +89,7 @@ export default function Hero() {
           {/* Action CTAs */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+            className="order-5 md:order-4 flex flex-col sm:flex-row gap-4 w-full sm:w-auto mt-8 md:mt-0"
           >
             <a
               href="#contact"
@@ -111,7 +111,7 @@ export default function Hero() {
           {/* Floating Trust Indicators */}
           <motion.div
             variants={itemVariants}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12 w-full border-t border-white/5 pt-8"
+            className="order-4 md:order-5 grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8 md:mt-12 w-full border-t border-white/5 pt-8"
           >
             <div className="flex items-center gap-3">
               <CheckCircle2 className="text-brand-orange shrink-0" size={20} />
