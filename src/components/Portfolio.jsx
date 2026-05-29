@@ -61,11 +61,28 @@ const projects = [
 ];
 
 export default function Portfolio() {
-  const [activeFilter, setActiveFilter] = useState('All');
+  const [activeFilters, setActiveFilters] = useState(['All']);
 
-  const filteredProjects = activeFilter === 'All'
+  const filteredProjects = activeFilters.includes('All') || activeFilters.length === 0
     ? projects
-    : projects.filter(p => p.subCategories.includes(activeFilter));
+    : projects.filter(p => p.subCategories.some(cat => activeFilters.includes(cat)));
+
+  const handleFilterClick = (cat) => {
+    if (cat === 'All') {
+      setActiveFilters(['All']);
+    } else {
+      let newFilters = activeFilters.filter(f => f !== 'All');
+      if (newFilters.includes(cat)) {
+        newFilters = newFilters.filter(f => f !== cat);
+      } else {
+        newFilters = [...newFilters, cat];
+      }
+      if (newFilters.length === 0) {
+        newFilters = ['All'];
+      }
+      setActiveFilters(newFilters);
+    }
+  };
 
   return (
     <section id="portfolio" className="py-24 md:py-32 bg-brand-bg relative overflow-hidden">
@@ -88,19 +105,25 @@ export default function Portfolio() {
 
           {/* Filtering Buttons */}
           <div className="flex flex-nowrap md:flex-wrap items-center gap-2 md:gap-3 bg-brand-card p-1.5 rounded-full border border-white/5 max-w-full overflow-x-auto no-scrollbar">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
-                className={`flex-shrink-0 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
-                  activeFilter === cat
-                    ? 'bg-brand-orange text-brand-bg'
-                    : 'text-brand-gray hover:text-brand-white hover:bg-white/5'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+            {categories.map((cat) => {
+              const isActive = activeFilters.includes(cat);
+              return (
+                <button
+                  key={cat}
+                  onClick={() => handleFilterClick(cat)}
+                  className={`flex-shrink-0 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 ${
+                    isActive
+                      ? 'bg-brand-orange text-brand-bg'
+                      : 'text-brand-gray hover:text-brand-white hover:bg-white/5'
+                  }`}
+                >
+                  {cat}
+                  {cat !== 'All' && isActive && (
+                    <span className="text-[10px] font-bold leading-none select-none">✕</span>
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
