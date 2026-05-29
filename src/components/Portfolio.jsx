@@ -140,7 +140,7 @@ export default function Portfolio() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ type: 'spring', stiffness: 80, damping: 20 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-6 no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 pb-4 md:pb-0"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
@@ -151,7 +151,7 @@ export default function Portfolio() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ type: 'spring', stiffness: 100, damping: 20 }}
                 key={project.id}
-                className="group relative rounded-2xl overflow-hidden bg-brand-card border border-white/5 flex flex-col justify-end aspect-[4/5] shadow-xl"
+                className="group relative rounded-2xl overflow-hidden bg-brand-card border border-white/5 flex flex-col justify-end aspect-[4/5] shadow-xl snap-start shrink-0 w-[85vw] sm:w-[450px] md:w-auto"
               >
                 {/* Project Image */}
                 <img
