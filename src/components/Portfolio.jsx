@@ -63,6 +63,7 @@ const projects = [
 export default function Portfolio() {
   const [activeFilters, setActiveFilters] = useState(['All']);
   const scrollContainerRef = useRef(null);
+  const timeoutIdRef = useRef(null);
 
   const filteredProjects = activeFilters.includes('All') || activeFilters.length === 0
     ? projects
@@ -78,39 +79,65 @@ export default function Portfolio() {
 
     if (!checkMobile()) return;
 
-    const interval = setInterval(() => {
-      const container = scrollContainerRef.current;
-      if (!container) return;
+    const container = scrollContainerRef.current;
+    if (!container) return;
 
-      const cards = container.querySelectorAll('.snap-start');
-      if (cards.length <= 1) return;
-
-      // Find the card closest to the current scroll position
-      let currentIdx = 0;
-      let minDiff = Infinity;
-      const scrollLeft = container.scrollLeft;
-
-      cards.forEach((card, idx) => {
-        const diff = Math.abs(card.offsetLeft - scrollLeft);
-        if (diff < minDiff) {
-          minDiff = diff;
-          currentIdx = idx;
-        }
-      });
-
-      // Calculate next index
-      const nextIdx = (currentIdx + 1) % cards.length;
-      const targetCard = cards[nextIdx];
-
-      if (targetCard) {
-        container.scrollTo({
-          left: targetCard.offsetLeft,
-          behavior: 'smooth',
-        });
+    const scheduleNextSlide = (delay) => {
+      if (timeoutIdRef.current) {
+        clearTimeout(timeoutIdRef.current);
       }
-    }, 2500);
 
-    return () => clearInterval(interval);
+      timeoutIdRef.current = setTimeout(() => {
+        const cards = container.querySelectorAll('.snap-start');
+        if (cards.length <= 1) return;
+
+        // Find the card closest to the current scroll position
+        let currentIdx = 0;
+        let minDiff = Infinity;
+        const scrollLeft = container.scrollLeft;
+
+        cards.forEach((card, idx) => {
+          const diff = Math.abs(card.offsetLeft - scrollLeft);
+          if (diff < minDiff) {
+            minDiff = diff;
+            currentIdx = idx;
+          }
+        });
+
+        // Calculate next index
+        const nextIdx = (currentIdx + 1) % cards.length;
+        const targetCard = cards[nextIdx];
+
+        if (targetCard) {
+          container.scrollTo({
+            left: targetCard.offsetLeft,
+            behavior: 'smooth',
+          });
+        }
+
+        // Schedule the next one with default 2.5s delay
+        scheduleNextSlide(2500);
+      }, delay);
+    };
+
+    // Start auto-swiping with initial 2.5s delay
+    scheduleNextSlide(2500);
+
+    const handleInteraction = () => {
+      // User manual interaction detected. Reset and delay the next swipe by 6 seconds.
+      scheduleNextSlide(6000);
+    };
+
+    container.addEventListener('touchstart', handleInteraction, { passive: true });
+    container.addEventListener('mousedown', handleInteraction);
+
+    return () => {
+      if (timeoutIdRef.current) {
+        clearTimeout(timeoutIdRef.current);
+      }
+      container.removeEventListener('touchstart', handleInteraction);
+      container.removeEventListener('mousedown', handleInteraction);
+    };
   }, [filteredProjects]);
 
   const handleFilterClick = (cat) => {
