@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const categories = ['All', 'Interiors', 'Architecture', 'Construction', 'Residential', 'Commercial'];
@@ -62,10 +62,56 @@ const projects = [
 
 export default function Portfolio() {
   const [activeFilters, setActiveFilters] = useState(['All']);
+  const scrollContainerRef = useRef(null);
 
   const filteredProjects = activeFilters.includes('All') || activeFilters.length === 0
     ? projects
     : projects.filter(p => p.subCategories.some(cat => activeFilters.includes(cat)));
+
+  useEffect(() => {
+    // Only run auto-scroll slideshow on mobile
+    const checkMobile = () => {
+      const isMobileWidth = window.innerWidth < 768;
+      const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      return isMobileWidth || !hasHover;
+    };
+
+    if (!checkMobile()) return;
+
+    const interval = setInterval(() => {
+      const container = scrollContainerRef.current;
+      if (!container) return;
+
+      const cards = container.querySelectorAll('.snap-start');
+      if (cards.length <= 1) return;
+
+      // Find the card closest to the current scroll position
+      let currentIdx = 0;
+      let minDiff = Infinity;
+      const scrollLeft = container.scrollLeft;
+
+      cards.forEach((card, idx) => {
+        const diff = Math.abs(card.offsetLeft - scrollLeft);
+        if (diff < minDiff) {
+          minDiff = diff;
+          currentIdx = idx;
+        }
+      });
+
+      // Calculate next index
+      const nextIdx = (currentIdx + 1) % cards.length;
+      const targetCard = cards[nextIdx];
+
+      if (targetCard) {
+        container.scrollTo({
+          left: targetCard.offsetLeft,
+          behavior: 'smooth',
+        });
+      }
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, [filteredProjects]);
 
   const handleFilterClick = (cat) => {
     if (cat === 'All') {
@@ -135,12 +181,13 @@ export default function Portfolio() {
 
         {/* Masonry Grid */}
         <motion.div 
+          ref={scrollContainerRef}
           layout
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ type: 'spring', stiffness: 80, damping: 20 }}
-          className="flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-6 no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 pb-4 md:pb-0"
+          className="relative flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-6 no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 pb-4 md:pb-0"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
