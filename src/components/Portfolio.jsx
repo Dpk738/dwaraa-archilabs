@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const categories = ['All', 'Interiors', 'Architecture', 'Construction', 'Residential', 'Commercial'];
+
 
 const projects = [
   {
@@ -61,7 +61,6 @@ const projects = [
 ];
 
 export default function Portfolio() {
-  const [activeFilters, setActiveFilters] = useState(['All']);
   const scrollContainerRef = useRef(null);
   const timeoutIdRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -79,22 +78,16 @@ export default function Portfolio() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const filteredProjects = useMemo(() => {
-    return activeFilters.includes('All') || activeFilters.length === 0
-      ? projects
-      : projects.filter(p => p.subCategories.some(cat => activeFilters.includes(cat)));
-  }, [activeFilters]);
-
   // Setup virtual looping array (duplicate elements at start/end) strictly for mobile slideshow
   const loopingProjects = useMemo(() => {
-    return isMobile && filteredProjects.length > 1
+    return isMobile && projects.length > 1
       ? [
-          { ...filteredProjects[filteredProjects.length - 1], id: `start-dup-${filteredProjects[filteredProjects.length - 1].id}`, isDuplicate: true },
-          ...filteredProjects.map(p => ({ ...p, isDuplicate: false })),
-          { ...filteredProjects[0], id: `end-dup-${filteredProjects[0].id}`, isDuplicate: true }
+          { ...projects[projects.length - 1], id: `start-dup-${projects[projects.length - 1].id}`, isDuplicate: true },
+          ...projects.map(p => ({ ...p, isDuplicate: false })),
+          { ...projects[0], id: `end-dup-${projects[0].id}`, isDuplicate: true }
         ]
-      : filteredProjects.map(p => ({ ...p, isDuplicate: false }));
-  }, [filteredProjects, isMobile]);
+      : projects.map(p => ({ ...p, isDuplicate: false }));
+  }, [isMobile]);
 
   // Jump scrollLeft to the first original card on list changes or view initialization
   useEffect(() => {
@@ -207,7 +200,7 @@ export default function Portfolio() {
       // Jump from left duplicate to last original card
       else if (scrollLeft <= startDuplicate.offsetLeft + 10) {
         container.scrollLeft = lastOriginal.offsetLeft;
-        setActiveSlideIndex(filteredProjects.length - 1);
+        setActiveSlideIndex(projects.length - 1);
       } else {
         // Calculate closest card to set active dot
         let closestIdx = 1;
@@ -220,7 +213,7 @@ export default function Portfolio() {
           }
         });
 
-        const totalOriginals = filteredProjects.length;
+        const totalOriginals = projects.length;
         let mappedIdx = closestIdx - 1;
         if (closestIdx === 0) {
           mappedIdx = totalOriginals - 1;
@@ -246,22 +239,6 @@ export default function Portfolio() {
     };
   }, [loopingProjects]);
 
-  const handleFilterClick = (cat) => {
-    if (cat === 'All') {
-      setActiveFilters(['All']);
-    } else {
-      let newFilters = activeFilters.filter(f => f !== 'All');
-      if (newFilters.includes(cat)) {
-        newFilters = newFilters.filter(f => f !== cat);
-      } else {
-        newFilters = [...newFilters, cat];
-      }
-      if (newFilters.length === 0) {
-        newFilters = ['All'];
-      }
-      setActiveFilters(newFilters);
-    }
-  };
 
   return (
     <section id="portfolio" className="py-24 md:py-32 bg-brand-bg relative overflow-hidden">
@@ -277,39 +254,14 @@ export default function Portfolio() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ type: 'spring', stiffness: 80, damping: 18 }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24"
+          className="mb-16 md:mb-24"
         >
-          <div>
-            <span className="text-brand-orange font-semibold text-xs tracking-widest uppercase mb-4 block">
-              Portfolio
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-brand-white">
-              Selected Commissions
-            </h2>
-          </div>
-
-          {/* Filtering Buttons */}
-          <div className="flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-2 md:gap-3 max-w-full">
-            {categories.map((cat) => {
-              const isActive = activeFilters.includes(cat);
-              return (
-                <button
-                  key={cat}
-                  onClick={() => handleFilterClick(cat)}
-                  className={`flex-shrink-0 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 flex items-center gap-1.5 border ${
-                    isActive
-                      ? 'bg-brand-orange text-brand-bg border-brand-orange'
-                      : 'bg-brand-card border-white/5 text-brand-gray hover:text-brand-white hover:border-white/10'
-                  }`}
-                >
-                  {cat}
-                  {cat !== 'All' && isActive && (
-                    <span className="text-[10px] font-bold leading-none select-none">✕</span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
+          <span className="text-brand-orange font-semibold text-xs tracking-widest uppercase mb-4 block">
+            Portfolio
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-brand-white">
+            Selected Commissions
+          </h2>
         </motion.div>
 
         {/* Masonry Grid */}
@@ -378,9 +330,9 @@ export default function Portfolio() {
         </motion.div>
 
         {/* Mobile Pagination Dots */}
-        {isMobile && filteredProjects.length > 1 && (
+        {isMobile && projects.length > 1 && (
           <div className="flex justify-center gap-2 mt-6">
-            {filteredProjects.map((_, idx) => (
+            {projects.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => {
