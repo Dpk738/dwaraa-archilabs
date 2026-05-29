@@ -64,10 +64,47 @@ export default function Portfolio() {
   const [activeFilters, setActiveFilters] = useState(['All']);
   const scrollContainerRef = useRef(null);
   const timeoutIdRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Monitor screen size to enable looping mode only on mobile viewports
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobileWidth = window.innerWidth < 768;
+      const hasHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      setIsMobile(isMobileWidth || !hasHover);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const filteredProjects = activeFilters.includes('All') || activeFilters.length === 0
     ? projects
     : projects.filter(p => p.subCategories.some(cat => activeFilters.includes(cat)));
+
+  // Setup virtual looping array (duplicate elements at start/end) strictly for mobile slideshow
+  const loopingProjects = isMobile && filteredProjects.length > 1
+    ? [
+        { ...filteredProjects[filteredProjects.length - 1], id: `start-dup-${filteredProjects[filteredProjects.length - 1].id}`, isDuplicate: true },
+        ...filteredProjects.map(p => ({ ...p, isDuplicate: false })),
+        { ...filteredProjects[0], id: `end-dup-${filteredProjects[0].id}`, isDuplicate: true }
+      ]
+    : filteredProjects.map(p => ({ ...p, isDuplicate: false }));
+
+  // Jump scrollLeft to the first original card on list changes or view initialization
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container || !isMobile) return;
+
+    const resetScroll = () => {
+      const cards = container.querySelectorAll('.snap-start');
+      if (cards.length > 2 && cards[1]) {
+        container.scrollLeft = cards[1].offsetLeft;
+      }
+    };
+
+    requestAnimationFrame(resetScroll);
+  }, [filteredProjects, isMobile]);
 
   useEffect(() => {
     // Only run auto-scroll slideshow on mobile
@@ -92,7 +129,7 @@ export default function Portfolio() {
         if (cards.length <= 1) return;
 
         // Find the card closest to the current scroll position
-        let currentIdx = 0;
+        let currentIdx = 1;
         let minDiff = Infinity;
         const scrollLeft = container.scrollLeft;
 
@@ -128,8 +165,32 @@ export default function Portfolio() {
       scheduleNextSlide(6000);
     };
 
+    // Loop scroller boundaries invisibly
+    const handleScrollBoundary = () => {
+      const cards = container.querySelectorAll('.snap-start');
+      if (cards.length <= 2) return;
+
+      const scrollLeft = container.scrollLeft;
+      const firstOriginal = cards[1];
+      const lastOriginal = cards[cards.length - 2];
+      const startDuplicate = cards[0];
+      const endDuplicate = cards[cards.length - 1];
+
+      if (!firstOriginal || !lastOriginal || !startDuplicate || !endDuplicate) return;
+
+      // Jump from right duplicate to first original card
+      if (scrollLeft >= endDuplicate.offsetLeft - 10) {
+        container.scrollLeft = firstOriginal.offsetLeft;
+      }
+      // Jump from left duplicate to last original card
+      else if (scrollLeft <= startDuplicate.offsetLeft + 10) {
+        container.scrollLeft = lastOriginal.offsetLeft;
+      }
+    };
+
     container.addEventListener('touchstart', handleInteraction, { passive: true });
     container.addEventListener('mousedown', handleInteraction);
+    container.addEventListener('scroll', handleScrollBoundary, { passive: true });
 
     return () => {
       if (timeoutIdRef.current) {
@@ -137,6 +198,7 @@ export default function Portfolio() {
       }
       container.removeEventListener('touchstart', handleInteraction);
       container.removeEventListener('mousedown', handleInteraction);
+      container.removeEventListener('scroll', handleScrollBoundary);
     };
   }, [filteredProjects]);
 
@@ -217,7 +279,7 @@ export default function Portfolio() {
           className="relative flex flex-nowrap overflow-x-auto snap-x snap-mandatory gap-6 no-scrollbar md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 pb-4 md:pb-0"
         >
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
+            {loopingProjects.map((project) => (
               <motion.div
                 layout
                 initial={{ opacity: 0, scale: 0.9 }}
