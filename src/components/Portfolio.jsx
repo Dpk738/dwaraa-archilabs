@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const categories = ['All', 'Interiors', 'Architecture', 'Construction', 'Residential', 'Commercial'];
@@ -79,18 +79,22 @@ export default function Portfolio() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const filteredProjects = activeFilters.includes('All') || activeFilters.length === 0
-    ? projects
-    : projects.filter(p => p.subCategories.some(cat => activeFilters.includes(cat)));
+  const filteredProjects = useMemo(() => {
+    return activeFilters.includes('All') || activeFilters.length === 0
+      ? projects
+      : projects.filter(p => p.subCategories.some(cat => activeFilters.includes(cat)));
+  }, [activeFilters]);
 
   // Setup virtual looping array (duplicate elements at start/end) strictly for mobile slideshow
-  const loopingProjects = isMobile && filteredProjects.length > 1
-    ? [
-        { ...filteredProjects[filteredProjects.length - 1], id: `start-dup-${filteredProjects[filteredProjects.length - 1].id}`, isDuplicate: true },
-        ...filteredProjects.map(p => ({ ...p, isDuplicate: false })),
-        { ...filteredProjects[0], id: `end-dup-${filteredProjects[0].id}`, isDuplicate: true }
-      ]
-    : filteredProjects.map(p => ({ ...p, isDuplicate: false }));
+  const loopingProjects = useMemo(() => {
+    return isMobile && filteredProjects.length > 1
+      ? [
+          { ...filteredProjects[filteredProjects.length - 1], id: `start-dup-${filteredProjects[filteredProjects.length - 1].id}`, isDuplicate: true },
+          ...filteredProjects.map(p => ({ ...p, isDuplicate: false })),
+          { ...filteredProjects[0], id: `end-dup-${filteredProjects[0].id}`, isDuplicate: true }
+        ]
+      : filteredProjects.map(p => ({ ...p, isDuplicate: false }));
+  }, [filteredProjects, isMobile]);
 
   // Jump scrollLeft to the first original card on list changes or view initialization
   useEffect(() => {
