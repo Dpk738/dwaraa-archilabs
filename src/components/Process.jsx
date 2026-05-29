@@ -89,7 +89,7 @@ export default function Process() {
                   variants={isEven ? leftItemVariants : rightItemVariants}
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: true, margin: '-50px' }}
+                  viewport={{ once: true, amount: 0.15 }}
                   className={`flex flex-col md:flex-row items-start relative ${
                     isEven ? 'md:flex-row-reverse' : ''
                   }`}

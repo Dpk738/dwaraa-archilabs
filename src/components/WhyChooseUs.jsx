@@ -41,7 +41,7 @@ export default function WhyChooseUs() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, amount: 0.15 }}
           className="grid grid-cols-1 md:grid-cols-6 gap-6"
         >
           {/* Bento Card 1: End-to-End Execution (Large, spans 3 cols, 2 rows equivalent or large layout block) */}

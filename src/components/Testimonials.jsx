@@ -51,7 +51,7 @@ export default function Testimonials() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ type: 'spring', stiffness: 80, damping: 18 }}
           className="max-w-2xl mb-16 md:mb-24"
         >
@@ -67,7 +67,7 @@ export default function Testimonials() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.1 }}
           className="relative max-w-4xl mx-auto bg-brand-card rounded-3xl border border-white/5 p-8 sm:p-12 md:p-16 overflow-hidden"
         >

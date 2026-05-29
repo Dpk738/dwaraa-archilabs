@@ -96,7 +96,7 @@ export default function Portfolio() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ type: 'spring', stiffness: 80, damping: 18 }}
           className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24"
         >
@@ -138,7 +138,7 @@ export default function Portfolio() {
           layout
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ type: 'spring', stiffness: 80, damping: 20 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >

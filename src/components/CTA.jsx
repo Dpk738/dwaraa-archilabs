@@ -31,7 +31,7 @@ export default function CTA() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ type: 'spring', stiffness: 80, damping: 20 }}
           className="p-12 md:p-20 rounded-3xl bg-brand-card border border-white/5 relative overflow-hidden"
         >

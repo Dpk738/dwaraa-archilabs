@@ -39,7 +39,7 @@ export default function About() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, amount: 0.15 }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center"
         >
           {/* Visual Presentation (Left Side) */}

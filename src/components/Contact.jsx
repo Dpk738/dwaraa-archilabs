@@ -54,7 +54,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ type: 'spring', stiffness: 80, damping: 18 }}
           className="max-w-2xl mb-16 md:mb-24"
         >
@@ -72,7 +72,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ type: 'spring', stiffness: 80, damping: 20 }}
             className="lg:col-span-5 flex flex-col justify-between gap-12"
           >
@@ -158,7 +158,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
+            viewport={{ once: true, amount: 0.15 }}
             transition={{ type: 'spring', stiffness: 80, damping: 20 }}
             className="lg:col-span-7 p-8 md:p-12 rounded-3xl bg-brand-card border border-white/5 relative"
           >
