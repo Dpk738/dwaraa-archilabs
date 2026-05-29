@@ -135,7 +135,7 @@ export default function Footer() {
         {/* Bottom Line */}
         <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
           <p className="text-brand-gray text-xs font-light text-center sm:text-left">
-            &copy; {new Date().getFullYear()} Dwaraa Archilabs. All Rights Reserved. Designed by creative agency.
+            &copy; {new Date().getFullYear()} Dwaraa Archilabs. All Rights Reserved. Designed by Dpk.
           </p>
 
           {/* Back to top button */}
