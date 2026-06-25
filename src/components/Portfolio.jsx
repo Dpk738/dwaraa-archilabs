@@ -11,7 +11,7 @@ const projects = [
     category: 'Architecture',
     subCategories: ['Architecture', 'Residential'],
     description: 'A minimal concrete and glass architectural villa showcasing dramatic floating volumes and linear lighting.',
-    image: '/assets/project_architecture.png',
+    image: '/assets/project_architecture.webp',
   },
   {
     id: 2,
@@ -20,7 +20,7 @@ const projects = [
     category: 'Interiors',
     subCategories: ['Interiors', 'Residential'],
     description: 'Custom HDMR kitchen cabinets and modular walkthrough wardrobes featuring premium wood and copper hardware.',
-    image: '/assets/project_interior.png',
+    image: '/assets/project_interior.webp',
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ const projects = [
     category: 'Construction',
     subCategories: ['Construction', 'Residential'],
     description: 'Structural concrete framework and foundation slab development for a modern luxury multi-family residence.',
-    image: '/assets/project_construction.png',
+    image: '/assets/project_construction.webp',
   },
   {
     id: 4,
@@ -38,7 +38,7 @@ const projects = [
     category: 'Commercial',
     subCategories: ['Commercial'],
     description: 'An architectural design studio and lobby layout prioritizing raw microconcrete walls and matte black accent slats.',
-    image: '/assets/project_commercial.png',
+    image: '/assets/project_commercial.webp',
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ const projects = [
     category: 'Architecture',
     subCategories: ['Architecture', 'Residential'],
     description: 'A premium villa featuring expansive raw concrete overhangs, double-height glazing, and custom steel frames.',
-    image: '/assets/hero_background.png',
+    image: '/assets/hero_background.webp',
   },
   {
     id: 6,
@@ -56,7 +56,7 @@ const projects = [
     category: 'Interiors',
     subCategories: ['Interiors', 'Residential'],
     description: 'Luxury master suite details with floor-to-ceiling wardrobe fittings, hidden hardware, and warm LED profile bands.',
-    image: '/assets/about_design.png',
+    image: '/assets/about_design.webp',
   },
 ];
 

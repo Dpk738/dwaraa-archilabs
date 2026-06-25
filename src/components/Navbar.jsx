@@ -53,8 +53,8 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
             <img 
-              src="/assets/logo.png" 
-              alt="Dwaraa Archilabs Logo" 
+              src="/assets/logo.webp" 
+              alt="Dwaraa Archilabs premium architecture and interior design studio logo" 
               className="h-14 md:h-[72px] w-auto object-contain hover:scale-105 transition-transform duration-300"
             />
           </a>

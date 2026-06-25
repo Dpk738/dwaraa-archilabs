@@ -1,3 +1,6 @@
+import ClientOnly from './components/ClientOnly';
+import SEO from './components/SEO';
+import SchemaMarkup from './components/SchemaMarkup';
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -14,8 +17,18 @@ import Footer from './components/Footer';
 export default function App() {
   return (
     <div className="relative min-h-screen bg-brand-bg text-brand-white selection:bg-brand-orange selection:text-brand-bg overflow-x-hidden font-body">
+      <SEO
+        title="Dwaraa Archilabs | Premium Architecture, Interiors & Turnkey Construction Hyderabad"
+        description="Dwaraa Archilabs is a premium Hyderabad-based architecture, modular interiors, and turnkey construction studio. We deliver custom home interiors, building permissions support, and material contract works."
+        url="https://dwaraa.in"
+        image="https://dwaraa.in/assets/og_image.webp"
+      />
+      <SchemaMarkup />
+
       {/* Desktop Custom Follower Cursor */}
-      <CustomCursor />
+      <ClientOnly>
+        <CustomCursor />
+      </ClientOnly>
 
       {/* Sticky Glassmorphic Navbar */}
       <Navbar />

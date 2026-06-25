@@ -79,8 +79,8 @@ export default function Footer() {
           {/* Logo & About summary (5 cols) */}
           <div className="md:col-span-5 space-y-6">
             <img 
-              src="/assets/logo.png" 
-              alt="Dwaraa Archilabs Logo" 
+              src="/assets/logo.webp" 
+              alt="Dwaraa Archilabs premium architecture and interior design studio logo" 
               className="h-10 w-auto object-contain"
             />
             <p className="text-brand-gray text-xs md:text-sm font-light max-w-sm leading-relaxed">

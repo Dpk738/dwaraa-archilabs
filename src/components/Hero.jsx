@@ -43,8 +43,8 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full pointer-events-none"
       >
         <img
-          src="/assets/hero_background.png"
-          alt="Dwaraa Archilabs Modern Architecture Showcase"
+          src="/assets/hero_background.webp"
+          alt="Premium modern architecture and turnkey home construction in Hyderabad by Dwaraa Archilabs"
           className="w-full h-full object-cover object-center"
         />
         {/* Cinematic Gradient Overlays */}
