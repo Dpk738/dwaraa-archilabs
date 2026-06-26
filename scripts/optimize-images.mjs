@@ -5,14 +5,7 @@ import sharp from 'sharp';
 const assetsDir = path.join(process.cwd(), 'public', 'assets');
 
 const tasks = [
-  { name: 'logo.webp', resize: { width: 230, height: 196 }, quality: 80 },
-  { name: 'apartment_interiors.webp', quality: 78 },
-  { name: 'about_design.webp', resize: { width: 1586, height: 1586 }, quality: 78 },
-  { name: 'hero_background.webp', quality: 78 },
-  { name: 'block_renders.webp', quality: 80 },
-  { name: 'vertex_kingston.webp', quality: 80 },
-  { name: 'bedroom_renders.webp', quality: 80 },
-  { name: 'bespoke_bedroom.webp', quality: 80 },
+  { name: 'about_design.webp', quality: 78 },
 ];
 
 async function run() {
