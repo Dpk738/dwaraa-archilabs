@@ -299,13 +299,10 @@ export default function Portfolio() {
                 {/* Content Pane */}
                 <div className="relative z-10 p-8 flex flex-col justify-end h-full">
                   
-                  {/* Category + Location tags */}
+                  {/* Category tag */}
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-[10px] uppercase font-bold tracking-widest text-brand-orange px-2 py-0.5 rounded bg-brand-orange/10 border border-brand-orange/10">
                       {project.category}
-                    </span>
-                    <span className="text-brand-gray text-[10px] uppercase tracking-widest font-semibold">
-                      {project.location}
                     </span>
                   </div>
 
