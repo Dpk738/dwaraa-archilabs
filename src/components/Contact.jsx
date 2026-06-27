@@ -86,8 +86,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-brand-white/40 text-xs font-semibold uppercase tracking-wider mb-1">Call Representative</p>
-                  <a href="tel:+919059919196" className="text-lg font-heading font-medium text-brand-white hover:text-brand-orange transition-colors">
-                    +91 90599 19196
+                  <a href="tel:+916303858512" className="text-lg font-heading font-medium text-brand-white hover:text-brand-orange transition-colors">
+                    +91 63038 58512
                   </a>
                   <p className="text-brand-gray text-xs mt-1">Direct project coordinator helpline</p>
                 </div>

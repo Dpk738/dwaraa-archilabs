@@ -123,11 +123,11 @@ export default function Navbar() {
 
             <div className="flex flex-col gap-4 mb-12">
               <a
-                href="tel:+919059919196"
+                href="tel:+916303858512"
                 className="flex items-center justify-center gap-3 p-4 rounded-xl bg-brand-card border border-white/5 text-brand-white hover:border-brand-orange/40 transition-colors"
               >
                 <PhoneCall size={18} className="text-brand-orange" />
-                <span>+91 90599 19196</span>
+                <span>+91 63038 58512</span>
               </a>
               <a
                 href="#contact"
