@@ -88,7 +88,12 @@ export default function Footer() {
             </p>
             {/* Socials */}
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full border border-white/10 hover:border-brand-orange/40 text-brand-gray hover:text-brand-orange flex items-center justify-center transition-colors">
+              <a 
+                href="https://www.instagram.com/dwaraa.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-10 h-10 rounded-full border border-white/10 hover:border-brand-orange/40 text-brand-gray hover:text-brand-orange flex items-center justify-center transition-colors"
+              >
                 <Instagram size={18} />
               </a>
               <a href="#" className="w-10 h-10 rounded-full border border-white/10 hover:border-brand-orange/40 text-brand-gray hover:text-brand-orange flex items-center justify-center transition-colors">
