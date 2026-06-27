@@ -126,7 +126,7 @@ export default function Footer() {
               </p>
               <p>
                 <strong className="text-brand-white font-medium">Location: </strong>
-                Sangareddy Bypass Road, Sangareddy, Telangana
+                Sangareddy Bypass Rd, opp. Tara Degree College, Marepally, Ahmed Nagar, Sangareddy, Telangana 502001
               </p>
               <p>
                 <strong className="text-brand-white font-medium">Domain: </strong>

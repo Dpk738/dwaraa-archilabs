@@ -101,9 +101,10 @@ export default function Contact() {
                 <div>
                   <p className="text-brand-white/40 text-xs font-semibold uppercase tracking-wider mb-1">Office Address</p>
                   <p className="text-brand-white text-base font-medium leading-relaxed">
-                    Sangareddy Bypass Road,<br />
-                    Opposite BSNL Office,<br />
-                    Sangareddy, Telangana
+                    Sangareddy Bypass Rd,<br />
+                    opp. Tara Degree College,<br />
+                    Marepally, Ahmed Nagar,<br />
+                    Sangareddy, Telangana 502001
                   </p>
                 </div>
               </div>
@@ -139,10 +140,10 @@ export default function Contact() {
                 </div>
                 <MapPin className="text-brand-orange mb-3 animate-bounce" size={28} />
                 <h4 className="text-brand-white font-heading font-semibold text-sm">Dwaraa Archilabs Location</h4>
-                <p className="text-brand-gray text-xs max-w-xs mt-1">Opposite BSNL Office, Sangareddy Bypass Road</p>
+                <p className="text-brand-gray text-xs max-w-xs mt-1">opp. Tara Degree College, Sangareddy Bypass Rd</p>
                 
                 <a
-                  href="https://maps.google.com/?q=BSNL+Office+Sangareddy+Telangana"
+                  href="https://maps.google.com/?q=Sangareddy+Bypass+Rd,+opp.+Tara+Degree+College,+Marepally,+Ahmed+Nagar,+Sangareddy,+Telangana+502001"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-4 px-4 py-2 bg-brand-bg border border-white/10 text-brand-white rounded-lg text-xs font-medium hover:border-brand-orange/40 hover:text-brand-orange transition-colors"

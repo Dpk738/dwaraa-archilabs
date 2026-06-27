@@ -9,8 +9,10 @@ export default function SchemaMarkup() {
     "description": "Premium architecture, modular interiors, and turnkey construction studio in Hyderabad, Telangana.",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Hyderabad",
+      "streetAddress": "Sangareddy Bypass Rd, opp. Tara Degree College, Marepally, Ahmed Nagar",
+      "addressLocality": "Sangareddy",
       "addressRegion": "Telangana",
+      "postalCode": "502001",
       "addressCountry": "IN"
     },
     "areaServed": ["Hyderabad", "Sangareddy", "Telangana"],
