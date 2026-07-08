@@ -87,6 +87,7 @@ export default function Contact() {
             email: fields.email || null,
             service_needed: fields.service,
             message: fields.message,
+            submitted_at: new Date().toISOString(),
           }])
         if (dbError) console.warn('Supabase insert failed:', dbError.message)
       } catch (dbErr) {
